@@ -2,7 +2,7 @@
     "name": "ament-task-provider",
     "displayName": "ROS 2 Ament Task Provider",
     "description": "Provides tasks and problem matchers for ROS2 projects using ament",
-    "version": "0.4.3",
+    "version": "0.0.0",
     "author": {
         "name": "Allison Thackston",
         "email": "allison@allisonthackston.com"
@@ -231,6 +231,7 @@
         "compile": "tsc -b",
         "watch": "tsc -b -w",
         "pack": "vsce package",
+        "version:set": "node scripts/set-version.js",
         "fix": "prettier --config .prettierrc --loglevel warn --write \"./**/*.{ts,md,json}\"",
         "lint": "prettier --config .prettierrc --loglevel warn --check \"./**/*.{ts,md,json}\"",
         "pub": "vsce publish",
