@@ -1,12 +1,12 @@
 # How to add an ament task
 
-Adding an ament linter to the vscode-ament-task-provider repository involves adding a problem matcher, updating task definitions, and updating `README.md`.
+Adding an ament linter to the vscode-ament-task-provider repository usually involves adding a problem matcher, adding tests, and updating `README.md`.
 
 Tasks are discovered dynamically from `ament_*` tools on PATH, so you do not need to add the tool to a hard-coded list in code.
 
-## Update task definitions in package.json
+## Optionally update task definition examples in package.json
 
-This file contains a section that defines the ament task definitions. You need to add the new linter to the `taskDefinitions` array. For example, if you want to add a linter called my_linter, add the following JSON object to the array:
+The extension discovers tasks dynamically, so adding a linter does not require a new task definition. The `taskDefinitions` section in `package.json` does include example task names for editor completion. If you want to add a linter called `my_linter`, add it to the `task.properties.task.examples` array:
 
 ```jsonc
     "contributes": {
@@ -25,7 +25,9 @@ This file contains a section that defines the ament task definitions. You need t
                             "cppcheck",
                             "lint_cmake",
                             "flake8",
+                            "mypy",
                             "pep257",
+                            "uncrustify",
                             "xmllint",
                             "my_linter"
                         ]
@@ -36,7 +38,7 @@ This file contains a section that defines the ament task definitions. You need t
 
 ### Update package.json
 
-This file contains a section that defines how to parse the output of the linter and identify errors. You need to add a new problem matcher for the new linter.
+This file contains a section that defines how to parse linter output and identify errors. Add a problem matcher for the new linter if you want its output to appear in the VS Code Problems panel.
 
 Here's an example of a problem matcher for a linter called my_linter:
 
@@ -61,19 +63,19 @@ Here's an example of a problem matcher for a linter called my_linter:
 }
 ```
 
-You can follow [this guide](https://www.allisonthackston.com/articles/vscode-tasks-problemmatcher.html) on how to set up a problem matcher
+You can follow [this guide](https://www.allisonthackston.com/articles/vscode-tasks-problemmatcher.html) on how to set up a problem matcher.
 
 Runtime note: the extension reads problem matcher names from `package.json` at activation time, so the matcher name must use the `ament_<tool>` format to be picked up automatically.
 
 ### Update tests
 
-Finally, you need to add some unit tests to make sure the new linter is working correctly. You need to add a new test file or modify an existing one to include tests for the new linter.
+Finally, add unit tests to make sure the new problem matcher is working correctly. Add a new test file or modify an existing one to include tests for the new linter.
 
 Tests check that the problem matcher definition matches the output of the linter. To automate this, there is a generation script and helper functions.
 
 #### Update tests/data
 
-Create two new files in the `tests/data` directory, one for a passing lint check and one for a failing lint check. The filenames should be in the format `<linter>_ok.<extension>` and `<linter>_fail.<extension>`, where <linter> is the name of the linter being added and <extension> is the file extension used by the linter (e.g. cpp for C++ files).
+Create two new files in the `tests/data` directory, one for a passing lint check and one for a failing lint check. The filenames should be in the format `<linter>_ok.<extension>` and `<linter>_fail.<extension>`, where `<linter>` is the name of the linter being added and `<extension>` is the file extension used by the linter, such as `cpp` for C++ files.
 
 #### Update tests/data/gen.sh
 

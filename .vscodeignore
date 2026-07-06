@@ -11,6 +11,7 @@
 workspaces/
 docs/**
 node_modules/**
+package-lock.json
 site/**
 **prettier**
 .cookies

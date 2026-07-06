@@ -62,13 +62,13 @@ You can also save the configuration within your workspace like so:
 
 ### Settings
 
-There is one optional setting that will set the setup script to run before the all of the linters in the workspace. This can be overwritten in the tasks.json file.
+There is one optional setting that sets the setup script to run before all linters in the workspace. This can be overridden in the tasks.json file.
 
 ![ament-task-provider-settings](https://github.com/althack/vscode-ament-task-provider/assets/6098197/6b795b22-dd16-4820-8e46-df317ed293fe)
 
 ## Contributing
 
-Want to contribute to this plugin! See [Contributing](CONTRIBUTING.md) for development details.
+Want to contribute to this extension? See [Contributing](CONTRIBUTING.md) for development details.
 
 ## License
 
