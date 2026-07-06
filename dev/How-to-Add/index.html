@@ -399,10 +399,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-task-definitions-in-packagejson" class="md-nav__link">
+  <a href="#optionally-update-task-definition-examples-in-packagejson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update task definitions in package.json
+        Optionally update task definition examples in package.json
       
     </span>
   </a>
@@ -560,10 +560,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#update-task-definitions-in-packagejson" class="md-nav__link">
+  <a href="#optionally-update-task-definition-examples-in-packagejson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Update task definitions in package.json
+        Optionally update task definition examples in package.json
       
     </span>
   </a>
@@ -677,10 +677,10 @@
 
 
 <h1 id="how-to-add-an-ament-task">How to add an ament task<a class="headerlink" href="#how-to-add-an-ament-task" title="Permanent link">&para;</a></h1>
-<p>Adding an ament linter to the vscode-ament-task-provider repository involves adding a problem matcher, updating task definitions, and updating <code>README.md</code>.</p>
+<p>Adding an ament linter to the vscode-ament-task-provider repository usually involves adding a problem matcher, adding tests, and updating <code>README.md</code>.</p>
 <p>Tasks are discovered dynamically from <code>ament_*</code> tools on PATH, so you do not need to add the tool to a hard-coded list in code.</p>
-<h2 id="update-task-definitions-in-packagejson">Update task definitions in package.json<a class="headerlink" href="#update-task-definitions-in-packagejson" title="Permanent link">&para;</a></h2>
-<p>This file contains a section that defines the ament task definitions. You need to add the new linter to the <code>taskDefinitions</code> array. For example, if you want to add a linter called my_linter, add the following JSON object to the array:</p>
+<h2 id="optionally-update-task-definition-examples-in-packagejson">Optionally update task definition examples in package.json<a class="headerlink" href="#optionally-update-task-definition-examples-in-packagejson" title="Permanent link">&para;</a></h2>
+<p>The extension discovers tasks dynamically, so adding a linter does not require a new task definition. The <code>taskDefinitions</code> section in <code>package.json</code> does include example task names for editor completion. If you want to add a linter called <code>my_linter</code>, add it to the <code>task.properties.task.examples</code> array:</p>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    &quot;contributes&quot;: {
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        &quot;taskDefinitions&quot;: [
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>            {
@@ -697,15 +697,17 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                            &quot;cppcheck&quot;,
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                            &quot;lint_cmake&quot;,
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                            &quot;flake8&quot;,
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                            &quot;pep257&quot;,
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                            &quot;xmllint&quot;,
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                            &quot;my_linter&quot;
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                        ]
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                    },
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                            &quot;mypy&quot;,
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                            &quot;pep257&quot;,
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                            &quot;uncrustify&quot;,
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                            &quot;xmllint&quot;,
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                            &quot;my_linter&quot;
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                        ]
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                    },
 </code></pre></div>
 <h2 id="add-problem-matcher">Add problem matcher<a class="headerlink" href="#add-problem-matcher" title="Permanent link">&para;</a></h2>
 <h3 id="update-packagejson">Update package.json<a class="headerlink" href="#update-packagejson" title="Permanent link">&para;</a></h3>
-<p>This file contains a section that defines how to parse the output of the linter and identify errors. You need to add a new problem matcher for the new linter.</p>
+<p>This file contains a section that defines how to parse linter output and identify errors. Add a problem matcher for the new linter if you want its output to appear in the VS Code Problems panel.</p>
 <p>Here's an example of a problem matcher for a linter called my_linter:</p>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;name&quot;: &quot;ament_my_linter&quot;,
@@ -726,13 +728,13 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>  ]
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>}
 </code></pre></div>
-<p>You can follow <a href="https://www.allisonthackston.com/articles/vscode-tasks-problemmatcher.html">this guide</a> on how to set up a problem matcher</p>
+<p>You can follow <a href="https://www.allisonthackston.com/articles/vscode-tasks-problemmatcher.html">this guide</a> on how to set up a problem matcher.</p>
 <p>Runtime note: the extension reads problem matcher names from <code>package.json</code> at activation time, so the matcher name must use the <code>ament_&lt;tool&gt;</code> format to be picked up automatically.</p>
 <h3 id="update-tests">Update tests<a class="headerlink" href="#update-tests" title="Permanent link">&para;</a></h3>
-<p>Finally, you need to add some unit tests to make sure the new linter is working correctly. You need to add a new test file or modify an existing one to include tests for the new linter.</p>
+<p>Finally, add unit tests to make sure the new problem matcher is working correctly. Add a new test file or modify an existing one to include tests for the new linter.</p>
 <p>Tests check that the problem matcher definition matches the output of the linter. To automate this, there is a generation script and helper functions.</p>
 <h4 id="update-testsdata">Update tests/data<a class="headerlink" href="#update-testsdata" title="Permanent link">&para;</a></h4>
-<p>Create two new files in the <code>tests/data</code> directory, one for a passing lint check and one for a failing lint check. The filenames should be in the format <code>&lt;linter&gt;_ok.&lt;extension&gt;</code> and <code>&lt;linter&gt;_fail.&lt;extension&gt;</code>, where <linter> is the name of the linter being added and <extension> is the file extension used by the linter (e.g. cpp for C++ files).</p>
+<p>Create two new files in the <code>tests/data</code> directory, one for a passing lint check and one for a failing lint check. The filenames should be in the format <code>&lt;linter&gt;_ok.&lt;extension&gt;</code> and <code>&lt;linter&gt;_fail.&lt;extension&gt;</code>, where <code>&lt;linter&gt;</code> is the name of the linter being added and <code>&lt;extension&gt;</code> is the file extension used by the linter, such as <code>cpp</code> for C++ files.</p>
 <h4 id="update-testsdatagensh">Update tests/data/gen.sh<a class="headerlink" href="#update-testsdatagensh" title="Permanent link">&para;</a></h4>
 <p>Update the <code>gen.sh</code> script in the <code>tests/data</code> directory to generate the new lint check files. Add a new section for the new linter, and call the fixture_gen function with the appropriate arguments.</p>
 <div class="language-sh highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># generate cpplint fixtures</span>

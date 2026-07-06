@@ -372,15 +372,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#develop-using-vscode" class="md-nav__link">
+  <a href="#develop-using-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Develop using VSCode
+        Develop using VS Code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Develop using VSCode">
+    <nav class="md-nav" aria-label="Develop using VS Code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -447,7 +447,7 @@
   <a href="#report-bugs-using-githubs-issues" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Report bugs using Github's issues
+        Report bugs using GitHub's issues
       
     </span>
   </a>
@@ -554,15 +554,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#develop-using-vscode" class="md-nav__link">
+  <a href="#develop-using-vs-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Develop using VSCode
+        Develop using VS Code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Develop using VSCode">
+    <nav class="md-nav" aria-label="Develop using VS Code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -629,7 +629,7 @@
   <a href="#report-bugs-using-githubs-issues" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Report bugs using Github's issues
+        Report bugs using GitHub's issues
       
     </span>
   </a>
@@ -673,12 +673,12 @@
 <li>Proposing new features</li>
 <li>Becoming a maintainer</li>
 </ul>
-<h2 id="develop-using-vscode">Develop using VSCode<a class="headerlink" href="#develop-using-vscode" title="Permanent link">&para;</a></h2>
+<h2 id="develop-using-vs-code">Develop using VS Code<a class="headerlink" href="#develop-using-vs-code" title="Permanent link">&para;</a></h2>
 <h3 id="whats-in-the-folder">What's in the folder<a class="headerlink" href="#whats-in-the-folder" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>package.json</code> - this is the manifest file that defines the list of extensions of the extension pack.</li>
+<li><code>package.json</code> - this is the extension manifest. It defines the extension metadata, commands, task definitions, problem matchers, scripts, and dependencies.</li>
 <li><code>src/extension.ts</code> - this is the entry point of the extension</li>
-<li><code>src/amentTaskProvider.ts</code> - this is provides the ament tasks</li>
+<li><code>src/amentTaskProvider.ts</code> - this provides the ament tasks</li>
 <li><code>tests/problem-matcher.test.ts</code> - this is the testing script</li>
 </ul>
 <h3 id="get-up-and-running-straight-away">Get up and running straight away<a class="headerlink" href="#get-up-and-running-straight-away" title="Permanent link">&para;</a></h3>
@@ -694,8 +694,10 @@
 <p>If you want to add another task, follow the <a href="../How-to-Add/">how to add directions</a></p>
 <h3 id="install-your-extension">Install your extension<a class="headerlink" href="#install-your-extension" title="Permanent link">&para;</a></h3>
 <ul>
-<li>To create your extension package run <code>vsce package</code></li>
-<li>To start using your extension with Visual Studio Code</li>
+<li>Install dependencies with <code>npm ci</code>.</li>
+<li>Set the version you want in the package with <code>npm run version:set -- --version=v0.1.5</code>. The committed development version may be <code>0.0.0</code>; release and local packages set the real version before packaging.</li>
+<li>Create your extension package with <code>npm run pack</code>.</li>
+<li>To start using your extension with Visual Studio Code, install the generated package:</li>
 </ul>
 <p><code>code --install-extension ament-task-provider-0.1.5.vsix</code></p>
 <ul>
@@ -703,7 +705,7 @@
 </ul>
 <h2 id="any-contributions-you-make-will-be-under-the-apache-software-license">Any contributions you make will be under the Apache Software License<a class="headerlink" href="#any-contributions-you-make-will-be-under-the-apache-software-license" title="Permanent link">&para;</a></h2>
 <p>In short, when you submit code changes, your submissions are understood to be under the same <a href="https://github.com/althack/vscode-ament-task-provider/blob/main/LICENSE">Apache License</a> that covers the project. Feel free to contact the maintainers if that's a concern.</p>
-<h2 id="report-bugs-using-githubs-issues">Report bugs using Github's <a href="https://github.com/althack/vscode-ament-task-provider/issues">issues</a><a class="headerlink" href="#report-bugs-using-githubs-issues" title="Permanent link">&para;</a></h2>
+<h2 id="report-bugs-using-githubs-issues">Report bugs using GitHub's <a href="https://github.com/althack/vscode-ament-task-provider/issues">issues</a><a class="headerlink" href="#report-bugs-using-githubs-issues" title="Permanent link">&para;</a></h2>
 <p>We use GitHub issues to track public bugs. Report a bug by <a href="https://github.com/althack/vscode-ament-task-provider/issues/new/choose">opening a new issue</a>; it's that easy!</p>
 <p>Write bug reports with detail, background, and sample code</p>
 <p><strong>Great Bug Reports</strong> tend to have:</p>
@@ -718,7 +720,7 @@
 </ul>
 <p>People <em>love</em> thorough bug reports. I'm not even kidding.</p>
 <h2 id="use-a-consistent-coding-style">Use a Consistent Coding Style<a class="headerlink" href="#use-a-consistent-coding-style" title="Permanent link">&para;</a></h2>
-<p>I'm using <a href="https://prettier.io/">prettier</a> to enforce styling. If you open this repository in VSCode using the dev container, everything should be set up for your already <img alt="😄" class="gemoji" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" title=":smile:" /></p>
+<p>I'm using <a href="https://prettier.io/">prettier</a> to enforce styling. If you open this repository in VS Code using the dev container, everything should already be set up for you.</p>
 
 
 
